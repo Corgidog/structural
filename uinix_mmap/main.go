@@ -40,6 +40,11 @@ func main() {
 
 	unix.Msync(b, unix.MS_SYNC)
 
+	f.Seek(int64(length), 0)
+	f.WriteString("\nappend content")
+
+	fmt.Println(string(b[0 : 30+length]))
+
 	err = unix.Munmap(b)
 	if err != nil {
 		panic(err)
